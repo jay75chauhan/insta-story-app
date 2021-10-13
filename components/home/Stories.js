@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { USERS } from "../data/users";
+import { USERS } from "../../data/users";
 
 export default function Stories() {
   return (
-    <View style={tw`my-3 px-1 `}>
+    <View style={tw`my-3 px-1 rounded-b-3xl`}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {USERS.map((story, index) => (
           <View key={index} style={tw`items-center mx-1  `}>

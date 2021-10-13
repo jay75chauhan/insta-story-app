@@ -1,16 +1,17 @@
 import { USERS } from "./users";
 
-export const POST = [
+export const POSTS = [
   {
     imageUrl: "https://i.ibb.co/182bP1y/4k.png",
     user: USERS[0].name,
     likes: 564,
-    caption: "Trasd ioejhf osiefj",
+    caption: "Trasd ioejhf osiefj ioejhf osiefj ioejhf osiefj",
     profile_picture: USERS[0].images,
     comments: [
       {
         user: "jayubn7gh",
-        comment: "wijmioejf iojnn ipojpio oinipon",
+        comment:
+          "wijmioejf iojnn ipojpio oinipon iojnn  iojnn  iojnn iojnn iojnn ",
       },
       {
         user: "jayubn7gh",
