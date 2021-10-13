@@ -10,7 +10,7 @@ export default function Header() {
       <TouchableOpacity>
         <Image
           style={tw`w-36 h-12`}
-          source={require(`../assets/header-logo.png`)}
+          source={require(`../../assets/header-logo.png`)}
         />
       </TouchableOpacity>
 

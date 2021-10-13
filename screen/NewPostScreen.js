@@ -1,6 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import tw from "tailwind-react-native-classnames";
+import AddNewPost from "../components/newPost/AddNewPost";
 export default function NewPostScreen() {
-  return <View style={tw`flex-1 bg-black`}></View>;
+  return (
+    <SafeAreaView style={tw`flex-1 bg-black pt-10`}>
+      <AddNewPost />
+    </SafeAreaView>
+  );
 }

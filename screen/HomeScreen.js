@@ -9,6 +9,7 @@ import BottomTabs, { bottomTabIcons } from "../components/home/BottomTabs";
 export default function HomeScreen() {
   return (
     <SafeAreaView style={tw`bg-black flex-1 pt-10 `}>
+      <StatusBar />
       <Header />
       <Stories />
       <ScrollView>
