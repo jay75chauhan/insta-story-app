@@ -6,11 +6,13 @@ import Stories from "../components/home/Stories";
 import Post from "../components/home/Post";
 import { POSTS } from "../data/post";
 import BottomTabs, { bottomTabIcons } from "../components/home/BottomTabs";
-export default function HomeScreen() {
+import { StatusBar } from "expo-status-bar";
+
+export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={tw`bg-black flex-1 pt-10 `}>
-      <StatusBar />
-      <Header />
+      <StatusBar style="light" />
+      <Header navigation={navigation} />
       <Stories />
       <ScrollView>
         {POSTS.map((post, index) => (

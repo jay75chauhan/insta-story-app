@@ -4,9 +4,9 @@ import tw from "tailwind-react-native-classnames";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-export default function Header() {
+export default function Header({ navigation }) {
   return (
-    <View style={tw`flex-row items-center justify-between px-3`}>
+    <View style={tw`flex-row mt-3 items-center justify-between px-3`}>
       <TouchableOpacity>
         <Image
           style={tw`w-36 h-12`}
@@ -15,7 +15,7 @@ export default function Header() {
       </TouchableOpacity>
 
       <View style={tw`flex-row`}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.push("NewPostScreen")}>
           <AntDesign
             name="pluscircleo"
             size={28}

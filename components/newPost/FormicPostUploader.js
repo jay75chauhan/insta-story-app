@@ -3,6 +3,7 @@ import { View, Text, Image, TextInput, Button } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import * as yup from "yup";
 import { Formik } from "formik";
+import validUrl from "valid-url";
 
 const PLACEHOLDER_URL =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNUl4ztVC9GRwkDkENsJD_oX-hcY_xrAri_QHgu8CVckAwNJi0qAMWKHfeaxSFwb55WNA&usqp=CAU";
@@ -12,12 +13,16 @@ const uploadPostSchema = yup.object().shape({
   caption: yup.string().max(2200, "Caption has reached the character"),
 });
 
-export default function FormicPostUploader() {
+export default function FormicPostUploader({ navigation }) {
   const [thumbnailsUrl, setThumbnailsUrl] = useState(PLACEHOLDER_URL);
   return (
     <Formik
       initialValues={{ caption: "", imageUrl: "" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => {
+        console.log(values);
+
+        navigation.goBack();
+      }}
       validationSchema={uploadPostSchema}
       validateOnMount={true}
     >
@@ -34,7 +39,7 @@ export default function FormicPostUploader() {
             style={tw`my-5 mx-2 flex-row justify-between border-b border-gray-500 pb-10 `}
           >
             <Image
-              source={{ uri: thumbnailsUrl || PLACEHOLDER_URL }}
+              source={{ uri: validUrl.isUri(thumbnailsUrl || PLACEHOLDER_URL) }}
               style={{ width: 110, height: 110, borderRadius: 10 }}
             />
             <View

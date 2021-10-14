@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/instagram.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#111"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,6 +25,8 @@
     },
     "web": {
       "favicon": "./assets/instagram.png"
-    }
+    },
+    "description": "this is instagram clone",
+    "githubUrl": "https://github.com/jay75chauhan/insta-story-app"
   }
 }
