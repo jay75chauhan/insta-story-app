@@ -1,6 +1,6 @@
 import React from "react";
-import Navigation from "./Navigation";
+import AuthNavigation from "./AuthNavigation";
 
 export default function App() {
-  return <Navigation />;
+  return <AuthNavigation />;
 }

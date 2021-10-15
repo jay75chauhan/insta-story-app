@@ -23,7 +23,8 @@
     "react-native-web": "~0.13.12",
     "tailwind-react-native-classnames": "^1.5.1",
     "valid-url": "^1.0.9",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "firebase": "8.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

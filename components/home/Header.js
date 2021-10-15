@@ -3,11 +3,12 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { firebase } from "../../firebase";
 
 export default function Header({ navigation }) {
   return (
     <View style={tw`flex-row mt-3 items-center justify-between px-3`}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => firebase.auth().signOut()}>
         <Image
           style={tw`w-36 h-12`}
           source={require(`../../assets/header-logo.png`)}

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TextInput } from "react-native";
 import { Button } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import * as yup from "yup";
 import { Formik } from "formik";
 import validUrl from "valid-url";
+import { db, firebase } from "../../firebase";
 
 const PLACEHOLDER_URL =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNUl4ztVC9GRwkDkENsJD_oX-hcY_xrAri_QHgu8CVckAwNJi0qAMWKHfeaxSFwb55WNA&usqp=CAU";
@@ -16,6 +17,17 @@ const uploadPostSchema = yup.object().shape({
 
 export default function FormicPostUploader({ navigation }) {
   const [thumbnailsUrl, setThumbnailsUrl] = useState(PLACEHOLDER_URL);
+  const [currentLoggedInUser, setCurrentLoggedInUser] = useState();
+
+  useEffect(() => {
+    setCurrentLoggedInUser({
+      username: firebase.auth().currentUser.displayName,
+      profilePicture: firebase.auth().currentUser.photoURL,
+    });
+  }, []);
+
+  console.log(currentLoggedInUser);
+
   return (
     <Formik
       initialValues={{ caption: "", imageUrl: "" }}
