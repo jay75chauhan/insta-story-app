@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, Image, TextInput, Button } from "react-native";
+import { View, Text, Image, TextInput } from "react-native";
+import { Button } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import * as yup from "yup";
 import { Formik } from "formik";

@@ -1,9 +1,8 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import LoginForm from "../components/loginscreen/LoginForm";
-
-export default function LoginScreen() {
+import SignupForm from "../components/signupScreen/SignupForm";
+export default function SignupScreen() {
   return (
     <View style={tw`flex-1 bg-black  `}>
       <View style={tw`items-center mt-20`}>
@@ -12,7 +11,7 @@ export default function LoginScreen() {
           style={tw`h-28 w-28`}
         />
       </View>
-      <LoginForm />
+      <SignupForm />
     </View>
   );
 }
