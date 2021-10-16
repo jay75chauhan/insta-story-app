@@ -17,24 +17,35 @@ const uploadPostSchema = yup.object().shape({
 
 export default function FormicPostUploader({ navigation }) {
   const [thumbnailsUrl, setThumbnailsUrl] = useState(PLACEHOLDER_URL);
-  const [currentLoggedInUser, setCurrentLoggedInUser] = useState();
 
-  useEffect(() => {
-    setCurrentLoggedInUser({
-      username: firebase.auth().currentUser.displayName,
-      profilePicture: firebase.auth().currentUser.photoURL,
-    });
-  }, []);
+  useEffect(() => {}, []);
 
-  console.log(currentLoggedInUser);
+  const uplloadPostToFirebase = (imageUrl, caption) => {
+    const unsubscribe = db
+      .collection("users")
+      .doc(firebase.auth().currentUser.email)
+      .collection("posts")
+      .add({
+        imageUrl: imageUrl,
+        user: firebase.auth().currentUser.displayName,
+        profile_picture: firebase.auth().currentUser.photoURL,
+        owner_uid: firebase.auth().currentUser.uid,
+        owner_email: firebase.auth().currentUser.email,
+        caption: caption,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        likes_by_users: [],
+        comments: [],
+      })
+      .then(() => navigation.goBack());
+
+    return unsubscribe;
+  };
 
   return (
     <Formik
       initialValues={{ caption: "", imageUrl: "" }}
       onSubmit={(values) => {
-        console.log(values);
-
-        navigation.goBack();
+        uplloadPostToFirebase(values.imageUrl, values.caption);
       }}
       validationSchema={uploadPostSchema}
       validateOnMount={true}

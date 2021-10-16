@@ -5,10 +5,35 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-
+import { db, firebase } from "../../firebase";
 import { Feather } from "@expo/vector-icons";
 
 const Post = ({ post }) => {
+  const handlLike = (post) => {
+    const currentLikeStatus = !post.likes_by_users.includes(
+      firebase.auth().currentUser.email
+    );
+
+    db.collection("users")
+      .doc(post.owner_email)
+      .collection("posts")
+      .doc(post.id)
+      .update({
+        likes_by_users: currentLikeStatus
+          ? firebase.firestore.FieldValue.arrayUnion(
+              firebase.auth().currentUser.email
+            )
+          : firebase.firestore.FieldValue.arrayRemove(
+              firebase.auth().currentUser.email
+            ),
+      })
+      .then(() => {
+        console.log("like succes fully");
+      })
+      .catch((e) => {
+        console.error(e, "like error");
+      });
+  };
   return (
     <View style={tw`mb-5 border-t-2 border-gray-800 rounded-xl`}>
       {/* <Divider
@@ -19,7 +44,7 @@ const Post = ({ post }) => {
 
       <PostHeader post={post} />
       <PostImage post={post} />
-      <PostFooter />
+      <PostFooter handlLike={handlLike} post={post} />
       <Likes post={post} />
       <Caption post={post} />
       <CommentSection post={post} />
@@ -57,11 +82,15 @@ const PostImage = ({ post }) => (
   </View>
 );
 
-const PostFooter = () => (
+const PostFooter = ({ handlLike, post }) => (
   <View style={tw`flex-row justify-between mt-3 mx-3  items-center`}>
     <View style={tw`flex-row items-center`}>
-      <TouchableOpacity>
-        <AntDesign name="hearto" size={27} color="white" style={tw`mr-4`} />
+      <TouchableOpacity onPress={() => handlLike(post)}>
+        {post.likes_by_users.includes(firebase.auth().currentUser.email) ? (
+          <AntDesign name="heart" size={27} color="#fb3958" style={tw`mr-4`} />
+        ) : (
+          <AntDesign name="hearto" size={27} color="white" style={tw`mr-4`} />
+        )}
       </TouchableOpacity>
       <TouchableOpacity>
         <FontAwesome5 name="comment" size={26} color="white" style={tw`mr-3`} />
@@ -80,7 +109,7 @@ const PostFooter = () => (
 
 const Likes = ({ post }) => (
   <Text style={tw`text-white mt-1 mx-3 font-bold text-lg  `}>
-    {post.likes.toLocaleString("en")} likes
+    {post.likes_by_users.length.toLocaleString("en")} likes
   </Text>
 );
 

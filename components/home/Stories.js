@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { USERS } from "../../data/users";
 
-export default function Stories() {
+export default function Stories({ posts }) {
   return (
     <View style={tw`my-3 px-1 rounded-b-3xl`}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
